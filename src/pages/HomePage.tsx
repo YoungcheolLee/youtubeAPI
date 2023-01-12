@@ -13,7 +13,7 @@ export const HomePage = () => {
     <div>
       Youtube Viewer
       {process.env.REACT_APP_YOUTUBE_APIKEY} <br />
-      <button onClick={handleOnCLick}>요청해라ㅡㅡ</button>
+      <button onClick={handleOnCLick}>API요청</button>
     </div>
   );
 };
