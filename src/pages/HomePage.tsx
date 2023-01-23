@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { YoutubeItem } from "../interfaces/YoutubeItem";
 
 export const HomePage = () => {
-  const [itemList, setItemList] = useState<any>([]);
-  const [input, setInput] = useState<any>("");
+  const [itemList, setItemList] = useState<Array<YoutubeItem>>([]);
+  const [input, setInput] = useState<string>("");
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     return setInput(e.target.value);
   };
 
@@ -28,18 +29,19 @@ export const HomePage = () => {
 
   return (
     <div>
-      Youtube Viewer <br />
-      <br />
+      <h1 style={{ color: "red" }}>Youtube Viewer</h1>
+      <div>
+        검색: <input type={"text"} value={input} onChange={handleInputChange} />
+        <button onClick={handleOnCLick}> Search! </button> <br />
+      </div>
       <br />
       <hr />
-      검색: <input type={"text"} value={input} onChange={handleInputChange} />
-      <button onClick={handleOnCLick}> SEARCH! </button> <br />
-      <h3>API Response</h3>
-      {itemList.map((item: any, idx: any) => (
+      <h3>Search Result</h3>
+      {itemList.map((item, idx: number) => (
         <div key={idx}>
-          {item.snippet.title} <br /> <br />
+          제목: {item.snippet.title} <br />
           <iframe
-            title={idx}
+            title={item.id.videoId}
             width="420"
             height="315"
             src={`https://www.youtube.com/embed/${item.id.videoId}`}
